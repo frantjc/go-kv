@@ -3,7 +3,7 @@ GOLANGCI-LINT ?= golangci-lint
 
 all: fmt lint
 
-fmt generate:
+fmt generate test:
 	@$(GO) $@ ./...
 
 lint:
@@ -11,4 +11,4 @@ lint:
 
 gen: generate
 
-.PHONY: all fmt generate lint proto gen
+.PHONY: all fmt generate test lint proto gen

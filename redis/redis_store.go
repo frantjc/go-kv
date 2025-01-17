@@ -84,6 +84,12 @@ func (o *Opener) Open(ctx context.Context, u *url.URL) (kv.Store, error) {
 		password = u.Query().Get("password")
 	}
 
+	if u.Host == "" {
+		u.Host = "localhost:6379"
+	} else if u.Port() == "" {
+		u.Host += ":6379"
+	}
+
 	client := redis.NewClient(&redis.Options{
 		Addr:     u.Host,
 		Username: xslice.Coalesce(u.User.Username(), u.Query().Get("username")),
